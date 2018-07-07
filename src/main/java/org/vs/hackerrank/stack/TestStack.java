@@ -1,4 +1,4 @@
-package org.vs.hackernoon.stack;
+package org.vs.hackerrank.stack;
 
 public class TestStack {
 

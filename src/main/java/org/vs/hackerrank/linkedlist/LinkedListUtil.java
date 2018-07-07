@@ -1,4 +1,4 @@
-package org.vs.hackernoon.linkedlist;
+package org.vs.hackerrank.linkedlist;
 
 public class LinkedListUtil {
 

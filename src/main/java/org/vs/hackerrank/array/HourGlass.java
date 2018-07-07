@@ -1,4 +1,4 @@
-package org.vs.hackernoon.array;
+package org.vs.hackerrank.array;
 
 /*
 Solution for https://www.hackerrank.com/challenges/2d-array/problem

@@ -1,4 +1,4 @@
-package org.vs.hackernoon.stack.maxElement;
+package org.vs.hackerrank.stack.maxElement;
 
 import java.util.Scanner;
 import java.util.Stack;
