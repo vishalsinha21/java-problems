@@ -1,7 +1,70 @@
 package org.vs.hackerrank.linkedlist;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 public class LinkedListUtil {
 
+    static boolean hasCycle(SinglyLinkedListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        SinglyLinkedListNode current = head;
+        List list = new ArrayList();
+
+        while (current != null) {
+            if (list.contains(current)) {
+                return true;
+            } else {
+                list.add(current);
+            }
+
+            current = current.next;
+        }
+
+        return false;
+    }
+
+    boolean hasCycleAlt1(SinglyLinkedListNode head) {
+        if (head == null) return false;
+
+        SinglyLinkedListNode hare = head;
+        HashSet<SinglyLinkedListNode> nodesVisited = new HashSet<>();
+
+        while (hare != null) {
+            if (nodesVisited.contains(hare)) return true;
+            nodesVisited.add(hare);
+            hare = hare.next;
+        }
+
+        return false;
+    }
+
+    static boolean hasCycleAlt(SinglyLinkedListNode head) {
+        if (head == null || head.next == null) {
+            return false;
+        }
+
+        SinglyLinkedListNode slow = head;
+        SinglyLinkedListNode fast = head.next;
+
+        while (slow != fast) {
+            if (slow != null) {
+                slow = slow.next;
+            } else {
+                return false;
+            }
+            if (fast != null && fast.next != null) {
+                fast = fast.next.next;
+            } else {
+                return false;
+            }
+        }
+
+        return true;
+    }
 
     static DoublyLinkedListNode reverse(DoublyLinkedListNode head) {
         if (head == null) {
