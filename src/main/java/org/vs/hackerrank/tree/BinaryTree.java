@@ -5,32 +5,34 @@ public class BinaryTree {
     private Node root;
 
     public void insert(int data) {
-        if (root == null) {
-            root = new Node(data);
-            return;
-        }
-
-        addNode(root, data);
+        root = insert(root, data);
     }
 
-    private void addNode(Node node, int data) {
-        if (node.left == null) {
-            node.left = new Node(data);
+    private Node insert(Node node, int data) {
+        if (node == null) {
+            return new Node(data);
         } else {
-            if (Math.random() % 2 == 0) addNode(node.left, data);
-        }
-
-        if (node.right == null) {
-            node.right = new Node(data);
-        } else {
-            if (Math.random() % 2 == 0) addNode(node.right, data);
-        }
-
-        if (node.left != null && node.right != null) {
-            if (Math.random() % 2 == 0) {
-                addNode(node.left, data);
+            if (node.left == null) {
+                node.left = insert(node.left, data);
             } else {
-                addNode(node.right, data);
+                node.right = insert(node.right, data);
+            }
+        }
+
+        return node;
+    }
+
+    public int getHeight(Node root) {
+        if (root == null) {
+            return 0;
+        } else {
+            int leftTreeHeight = getHeight(root.left);
+            int rightTreeHeight = getHeight(root.left);
+
+            if (leftTreeHeight > rightTreeHeight) {
+                return leftTreeHeight + 1;
+            } else {
+                return rightTreeHeight + 1;
             }
         }
     }
@@ -57,6 +59,6 @@ public class BinaryTree {
         tree.insert(5);
         tree.insert(90);
 
-        tree.inOrder(tree.root);
+        TreeUtil.levelOrder(tree.root);
     }
 }

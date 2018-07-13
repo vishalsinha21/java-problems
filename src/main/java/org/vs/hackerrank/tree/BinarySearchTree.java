@@ -74,23 +74,27 @@ public class BinarySearchTree {
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
 
-        tree.insert(5);
-        tree.insert(2);
-        tree.insert(8);
-        tree.insert(1);
-        tree.insert(3);
-        tree.insert(6);
-        tree.insert(9);
+        tree.insert(100);
+        tree.insert(80);
+        tree.insert(150);
+        tree.insert(60);
+        tree.insert(90);
+        tree.insert(140);
+        tree.insert(200);
+        tree.insert(40);
+        tree.insert(70);
+        tree.insert(85);
+        tree.insert(95);
+        tree.insert(130);
+        tree.insert(145);
+        tree.insert(180);
+        tree.insert(220);
 
-        System.out.print("pre order: ");
+        System.out.print("in order: ");
         tree.inOrder(tree.root);
         System.out.println();
-        tree.inOrderReverse(tree.root);
-        System.out.println();
 
-        tree.preOrder(tree.root);
-        System.out.println();
-        tree.postOrder(tree.root);
-
+        System.out.println(TreeUtil.find(tree.root, 100));
+        System.out.println(TreeUtil.find(tree.root, 99));
     }
 }

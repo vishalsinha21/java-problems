@@ -1,30 +1,104 @@
 package org.vs.hackerrank.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class TreeUtil {
 
-    public boolean checkBST(Node root) {
-        return isBST(root);
-    }
-
-    private boolean isBST(Node node) {
-        if (node.left != null) {
-            if (node.left.data > node.data) {
-                return false;
-            } else {
-                return true && isBST(node.left);
-            }
+    public static Node find(Node node, int data) {
+        if (node == null) {
+            return null;
+        } else if (node.data == data) {
+            return node;
         }
 
-        if (node.right != null) {
-            if (node.right.data < node.data) {
-                return false;
+        if (data < node.data) {
+            return find(node.left, data);
+        } else {
+            return find(node.right, data);
+        }
+    }
+
+    public static void levelOrder(Node root) {
+        int height = getHeight(root);
+        for (int i = 1; i <= height; i++) {
+            printLevel(root, i);
+            System.out.println();
+        }
+    }
+
+    private static void printLevel(Node root, int level) {
+        if (root == null) {
+            return;
+        }
+        if (level == 1) {
+            System.out.print(root.data + " ");
+        }
+        if (level > 1) {
+            printLevel(root.left, level - 1);
+            printLevel(root.right, level - 1);
+        }
+    }
+
+    public static void topView(Node root) {
+        Node current = root.left;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.left;
+        }
+
+        System.out.print(root.data + " ");
+
+        current = root.right;
+        while (current != null) {
+            System.out.print(current.data + " ");
+            current = current.right;
+        }
+    }
+
+
+    public static int getHeight(Node node) {
+        if (node == null) {
+            return 0;
+        } else {
+            int leftTreeHeight = getHeight(node.left);
+            int rightTreeHeight = getHeight(node.right);
+
+            if (leftTreeHeight > rightTreeHeight) {
+                return leftTreeHeight + 1;
             } else {
-                return true && isBST(node.right);
+                return rightTreeHeight + 1;
+            }
+        }
+    }
+
+    static List<Integer> list = new ArrayList<>();
+
+    public boolean checkBST(Node root) {
+        getInOrder(root);
+
+        for (int i = 0; i < list.size() - 1; i++) {
+            if (list.get(i) > list.get(i + 1)) {
+                return false;
             }
         }
 
         return true;
     }
+
+    private void getInOrder(Node node) {
+        if (node.left != null) {
+            getInOrder(node.left);
+        }
+
+        list.add(Integer.valueOf(node.data));
+
+        if (node.right != null) {
+            getInOrder(node.right);
+        }
+
+    }
+
 
     public static Node insert(Node root, int data) {
         if (root == null) {
@@ -83,6 +157,5 @@ public class TreeUtil {
         }
         System.out.print(root.data + " ");
     }
-
 
 }
