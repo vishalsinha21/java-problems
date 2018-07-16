@@ -2,8 +2,25 @@ package org.vs.hackerrank.tree;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 public class TreeUtil {
+
+    public static void inOrderWithStack(Node root) {
+        Node current = root;
+        Stack<Node> stack = new Stack<>();
+
+        while (current != null || !stack.empty()) {
+            while (current != null) {
+                stack.push(current);
+                current = current.left;
+            }
+
+            current = stack.pop();
+            System.out.print(current.data + " ");
+            current = current.right;
+        }
+    }
 
     public static Node find(Node node, int data) {
         if (node == null) {
@@ -126,6 +143,13 @@ public class TreeUtil {
                 node.right = newNode;
             }
         }
+    }
+
+    public static int sum(Node root) {
+        if (root == null) {
+            return 0;
+        }
+        return root.data + sum(root.left) + sum(root.right);
     }
 
     public static void inOrder(Node root) {

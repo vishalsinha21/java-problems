@@ -90,11 +90,12 @@ public class BinarySearchTree {
         tree.insert(180);
         tree.insert(220);
 
-        System.out.print("in order: ");
-        tree.inOrder(tree.root);
+        TreeUtil.inOrder(tree.root);
         System.out.println();
-
-        System.out.println(TreeUtil.find(tree.root, 100));
-        System.out.println(TreeUtil.find(tree.root, 99));
+        TreeUtil.preOrder(tree.root);
+        System.out.println();
+        TreeUtil.postOrder(tree.root);
+        System.out.println();
+        System.out.println(TreeUtil.sum(tree.root));
     }
 }
