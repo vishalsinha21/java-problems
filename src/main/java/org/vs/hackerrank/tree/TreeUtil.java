@@ -1,10 +1,51 @@
 package org.vs.hackerrank.tree;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
 public class TreeUtil {
+
+    public static void main(String[] args) {
+        String[] split = "abc".split("");
+        System.out.println(Arrays.toString(split));
+    }
+
+    //lowest common ancestor
+    public static Node lca(Node root, int v1, int v2) {
+        if (v1 == root.data || v2 == root.data
+                || v1 < root.data && v2 > root.data
+                || v1 > root.data && v2 < root.data ) {
+            return root;
+        }
+        if (v1 < root.data && v2 < root.data) {
+            return lca(root.left, v1, v2);
+        } else {
+            return lca(root.right, v1, v2);
+        }
+    }
+
+
+    //huffman decoding
+    static void decode(String str, Node root) {
+        char[] chars = str.toCharArray();
+        Node current = root;
+
+        for (char c : chars) {
+            if (c == '0') {
+                current = current.left;
+            }
+            if (c == '1') {
+                current = current.right;
+            }
+            if (current.left == null && current.right == null) {
+                System.out.print(current.data);
+                current = root;
+            }
+        }
+    }
+
 
     public static void inOrderWithStack(Node root) {
         Node current = root;
