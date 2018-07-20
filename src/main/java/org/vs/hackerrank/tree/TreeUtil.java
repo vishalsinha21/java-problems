@@ -7,6 +7,15 @@ import java.util.Stack;
 
 public class TreeUtil {
 
+
+    public static boolean isMirror(Node root1, Node root2) {
+        String str1 = TreeUtil.inOrderString(root1);
+        String str2 = TreeUtil.inOrderReverseString(root2);
+
+        return str1.equals(str2);
+    }
+
+
     public static void main(String[] args) {
         String[] split = "abc".split("");
         System.out.println(Arrays.toString(split));
@@ -16,7 +25,7 @@ public class TreeUtil {
     public static Node lca(Node root, int v1, int v2) {
         if (v1 == root.data || v2 == root.data
                 || v1 < root.data && v2 > root.data
-                || v1 > root.data && v2 < root.data ) {
+                || v1 > root.data && v2 < root.data) {
             return root;
         }
         if (v1 < root.data && v2 < root.data) {
@@ -193,13 +202,61 @@ public class TreeUtil {
         return root.data + sum(root.left) + sum(root.right);
     }
 
+
+    static StringBuilder builder = new StringBuilder();
+
+    public static String inOrderString(Node root) {
+        builder = new StringBuilder();
+        inOrderStr(root);
+
+        return builder.toString();
+    }
+
+    private static void inOrderStr(Node root) {
+        if (root.left != null) {
+            inOrderStr(root.left);
+        }
+        builder.append(root.data + " ");
+        if (root.right != null) {
+            inOrderStr(root.right);
+        }
+    }
+
+
     public static void inOrder(Node root) {
         if (root.left != null) {
             inOrder(root.left);
         }
-        System.out.print(root.data + " ");
+        builder.append(root.data + " ");
         if (root.right != null) {
             inOrder(root.right);
+        }
+    }
+
+    public static void inOrderReverse(Node root) {
+        if (root.right != null) {
+            inOrderReverse(root.right);
+        }
+        System.out.print(root.data + " ");
+        if (root.left != null) {
+            inOrderReverse(root.left);
+        }
+    }
+
+    public static String inOrderReverseString(Node root) {
+        builder = new StringBuilder();
+        inOrderReverseStr(root);
+
+        return builder.toString();
+    }
+
+    private static void inOrderReverseStr(Node root) {
+        if (root.right != null) {
+            inOrderReverseStr(root.right);
+        }
+        builder.append(root.data + " ");
+        if (root.left != null) {
+            inOrderReverseStr(root.left);
         }
     }
 

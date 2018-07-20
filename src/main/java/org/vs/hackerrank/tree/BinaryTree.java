@@ -153,6 +153,32 @@ public class BinaryTree {
     }
 
     public static void main(String[] args) {
+        isMirror();
+    }
+
+    private static void isMirror() {
+        BinaryTree tree1 = new BinaryTree();
+        tree1.insert(1);
+        tree1.insert(2);
+        tree1.insert(3);
+        tree1.insert(4);
+        tree1.insert(5);
+        tree1.insert(6);
+        tree1.insert(7);
+
+        BinaryTree tree2 = new BinaryTree();
+        tree2.insert(1);
+        tree2.insert(3);
+        tree2.insert(2);
+        tree2.insert(7);
+        tree2.insert(6);
+        tree2.insert(5);
+        tree2.insert(4);
+
+        System.out.println(TreeUtil.isMirror(tree1.root, tree2.root));
+    }
+
+    private static void checkDeletion() {
         BinaryTree tree = new BinaryTree();
         for (int i = 1; i <= 14; i++) {
             tree.insert(i);
@@ -161,7 +187,6 @@ public class BinaryTree {
         TreeUtil.levelOrder(tree.root);
         tree.delete(2);
         TreeUtil.levelOrder(tree.root);
-
     }
 
     class NodeWithParent {
