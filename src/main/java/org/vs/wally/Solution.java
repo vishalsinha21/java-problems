@@ -13,7 +13,7 @@ import static org.vs.wally.Direction.WEST;
 public class Solution {
 
     public static void main(String[] args) {
-        Path path = new Path();
+        Wally wally = new Wally();
 
         Scanner scanner = new Scanner(System.in);
         List<Point> obstacles = new ArrayList<>();
@@ -24,8 +24,7 @@ public class Solution {
         for (int i = 0; i < obstacleCount; i++) {
             int x = scanner.nextInt();
             int y = scanner.nextInt();
-            Point point = new Point(x, y);
-            obstacles.add(point);
+            obstacles.add(new Point(x, y));
         }
 
         for (int i = 0; i < stepsCount; i++) {
@@ -34,30 +33,33 @@ public class Solution {
             switch (queries[0]) {
                 case "M":
                     int moves = scanner.nextInt();
-                    path.increment(moves, obstacles);
+                    wally.move(moves, obstacles);
                     break;
                 case "L":
-                    path.takeLeft();
+                    wally.takeLeft();
                     break;
                 case "R":
-                    path.takeRight();
+                    wally.takeRight();
                     break;
             }
         }
 
-        System.out.println(path.maxDistance);
+        System.out.println(wally.getMaxDistanceFromHome());
     }
 
 }
 
-class Path {
-    Point current;
-    Direction currentDirection;
-    Double maxDistance = 0.0;
+class Wally {
+    private static final Point home = new Point(0, 0);
+    private Double maxDistanceFromHome = 0.0;
 
-    public Path() {
+    private Point current;
+    private Direction currentDirection;
+
+    public Wally() {
         current = new Point(0, 0);
         currentDirection = NORTH;
+        maxDistanceFromHome = 0.0;
     }
 
     public void takeLeft() {
@@ -99,9 +101,9 @@ class Path {
         }
     }
 
-    public void increment(int moves, List<Point> obstacles) {
+    public void move(int moves, List<Point> obstacles) {
         for (int i = 0; i < moves; i++) {
-            Point point = increment();
+            Point point = moveOneBlock();
             if (obstacles.contains(point)) {
                 break;
             } else {
@@ -109,7 +111,7 @@ class Path {
             }
         }
 
-        maxDistance = Math.max(maxDistance, distance(0, 0, current.x, current.y));
+        maxDistanceFromHome = Math.max(maxDistanceFromHome, distance(0, 0, current.x, current.y));
     }
 
     static double distance(int x1, int y1, int x2, int y2) {
@@ -117,7 +119,7 @@ class Path {
         return new BigDecimal(distance).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
-    private Point increment() {
+    private Point moveOneBlock() {
         Point temp = new Point(current);
         switch (currentDirection) {
             case NORTH:
@@ -144,6 +146,9 @@ class Path {
         return current + "," + currentDirection;
     }
 
+    public Double getMaxDistanceFromHome() {
+        return maxDistanceFromHome;
+    }
 }
 
 enum Direction {
