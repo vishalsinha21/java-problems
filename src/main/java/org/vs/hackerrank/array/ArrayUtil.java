@@ -1,6 +1,9 @@
 package org.vs.hackerrank.array;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -9,28 +12,60 @@ public class ArrayUtil {
 
 
     public static void main(String[] args) {
-        int[][] arr = new int[][] {
-                {1, 5, 3},
-                {4, 8, 7},
-                {6, 9, 1}
-        };
-
-        arrayManipulation(10, arr);
-
     }
 
+
+    //https://www.hackerrank.com/challenges/contacts/problem
+    static int[] contacts(String[][] queries) {
+        Map<String, List<String>> contacts = new HashMap<>();
+
+        List<Integer> counts = new ArrayList<>();
+        for (int i = 0; i < queries.length; i++) {
+            String contact = queries[i][1];
+            String firstAlphabet = contact.substring(0, 1);
+            List<String> list = contacts.get(firstAlphabet);
+
+            switch (queries[i][0]) {
+                case "add":
+                    if (list == null) {
+                        List<String> newList =new ArrayList<>();
+                        newList.add(contact);
+                        contacts.put(firstAlphabet, newList);
+                    } else {
+                        list.add(contact);
+                        contacts.put(firstAlphabet, list);
+                    }
+                    break;
+                case "find":
+                    int count = 0;
+                    if (list != null) {
+                        for (int j = 0; j < list.size(); j++) {
+                            if (list.get(j).startsWith(queries[i][1])) {
+                                count++;
+                            }
+                        }
+                    }
+                    counts.add(count);
+                    break;
+            }
+        }
+
+        return counts.stream().mapToInt(i -> i).toArray();
+    }
 
     // Complete the arrayManipulation function below.
     static long arrayManipulation(int n, int[][] queries) {
         long[] arr = new long[n];
+        long max = 0;
 
         for (int i = 0; i < queries.length; i++) {
             for (int j = queries[i][0] - 1; j <= queries[i][1] - 1; j++) {
                 arr[j] += queries[i][2];
+                max = Math.max(max, arr[j]);
             }
         }
 
-        return Arrays.stream(arr).max().getAsLong();
+        return max;
     }
 
     //max index product

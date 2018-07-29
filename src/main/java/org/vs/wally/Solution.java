@@ -111,7 +111,7 @@ class Wally {
             }
         }
 
-        maxDistanceFromHome = Math.max(maxDistanceFromHome, distance(0, 0, current.x, current.y));
+        maxDistanceFromHome = Math.max(maxDistanceFromHome, distance(home.x, home.y, current.x, current.y));
     }
 
     static double distance(int x1, int y1, int x2, int y2) {
