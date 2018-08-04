@@ -1,16 +1,17 @@
-package org.vs.queens;
+package org.vs.n_queen;
+
+import org.vs.queens.ChessBoard;
 
 import java.util.Random;
 
-//this algorithm places eight queens on the board with brute force
-public class EightQueens {
+public class FourQueens {
 
     public static void main(String[] args) {
-        ChessBoard board = null;
+        Board board = null;
 
         while (true) {
 
-            board = new ChessBoard(4);
+            board = new Board(4);
 
             for (int row = 0; row < 4; row++) {
                 int column = new Random().nextInt(4);
@@ -19,7 +20,7 @@ public class EightQueens {
                     board.placeQueen(row, column);
                 }
 
-                if (!board.anyPlaceAvailable()) {
+                if (!board.isAnyPlaceAvailable()) {
                     break;
                 }
             }
@@ -29,6 +30,6 @@ public class EightQueens {
             }
         }
 
-        board.print();
+        System.out.println(board);
     }
 }

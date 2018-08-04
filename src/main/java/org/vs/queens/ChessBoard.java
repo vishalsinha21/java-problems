@@ -16,7 +16,6 @@ public class ChessBoard {
     public void placeQueen(int row, int column) {
         markQueenAttack(row, column);
         board[row][column] = QUEEN;
-
     }
 
     public boolean isAvailable(int row, int column) {
