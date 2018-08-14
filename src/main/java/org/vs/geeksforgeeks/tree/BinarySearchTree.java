@@ -2,7 +2,7 @@ package org.vs.geeksforgeeks.tree;
 
 public class BinarySearchTree {
 
-    Node root;
+    public Node root;
 
     public void add(int data) {
         Node newNode = new Node(data);
