@@ -2,6 +2,103 @@ package org.vs.geeksforgeeks.tree;
 
 public class TreeUtil {
 
+    int countLeaves(Node node) {
+        if (node == null) {
+            return 0;
+        } else if (node.left == null && node.right == null) {
+            return 1;
+        }
+
+        return countLeaves(node.left) + countLeaves(node.right);
+    }
+
+    int diameter(Node node) {
+        nodeDiameter(node, 0);
+        return max;
+    }
+
+    static int max = 0;
+
+    private int nodeDiameter(Node node, int height) {
+        if (node == null) {
+            return height;
+        }
+
+        int lHeight = nodeDiameter(node.left, height + 1) - 1;
+        int rHeight = nodeDiameter(node.right, height + 1) - 1;
+
+        int diameter = lHeight + rHeight + 1;
+        max = Math.max(diameter, max);
+
+        return Math.max(lHeight, rHeight);
+    }
+
+
+    public static boolean isSymmetric(Node root) {
+        StringBuilder builder1 = new StringBuilder();
+        StringBuilder builder2 = new StringBuilder();
+
+        inOrder(root, builder1);
+        inOrderReverse(root, builder2);
+
+        return builder1.toString().equals(builder2.toString());
+    }
+
+    private static void inOrderReverse(Node node, StringBuilder builder) {
+        if (node.right != null) {
+            inOrderReverse(node.right, builder);
+        }
+        builder.append(node.data + " ");
+        if (node.left != null) {
+            inOrderReverse(node.left, builder);
+        }
+    }
+
+    private static void inOrder(Node node, StringBuilder builder) {
+        if (node.left != null) {
+            inOrder(node.left, builder);
+        }
+        builder.append(node.data + " ");
+        if (node.right != null) {
+            inOrder(node.right, builder);
+        }
+    }
+
+    int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return getHeight(node, 0) - 1;
+    }
+
+    boolean isBalanced(Node root) {
+        isBalanced = true;
+        getHeight(root, 0);
+
+        return isBalanced;
+    }
+
+    static boolean isBalanced = true;
+
+    private int getHeight(Node node, int height) {
+        if (node == null) {
+            return height;
+        }
+
+        int lHeight = getHeight(node.left, height + 1);
+        int rHeight = getHeight(node.right, height + 1);
+
+        isBalanced = isBalanced && !(Math.abs(lHeight - rHeight) > 1);
+        return Math.max(lHeight, rHeight);
+    }
+
+    public static int size(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        return size(node.left) + 1 + size(node.right);
+    }
+
 
     public void levelOrderSpiral(Node root) {
         int maxDepth = maxDepth(root);
@@ -86,13 +183,10 @@ public class TreeUtil {
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
 
-        tree.root = new Node(1);
-        tree.root.left = new Node(2);
-        tree.root.right = new Node(3);
-        tree.root.right.left = new Node(6);
-        tree.root.left.left = new Node(4);
-        tree.root.left.left.right = new Node(5);
+        for (int i = 1; i <= 13; i++) {
+            tree.add(i);
+        }
 
-        new TreeUtil().levelOrderSpiral(tree.root);
+        System.out.println(new TreeUtil().countLeaves(tree.root));
     }
 }
