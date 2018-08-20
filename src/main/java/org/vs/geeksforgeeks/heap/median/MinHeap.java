@@ -1,7 +1,10 @@
-package org.vs.geeksforgeeks.heap;
+package org.vs.geeksforgeeks.heap.median;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
+
+//median in a stream using heap sort, correct but need performance improvement
 public class MinHeap {
 
     int capacity = 10;
@@ -88,19 +91,23 @@ public class MinHeap {
     }
 
     public static void main(String[] args) {
-        MinHeap minHeap = new MinHeap(10);
+        Scanner scanner = new Scanner(System.in);
+        int size = scanner.nextInt();
+        MinHeap heap = new MinHeap(size);
 
-        minHeap.add(10);
-        minHeap.add(20);
-        minHeap.add(30);
-        minHeap.add(40);
-        minHeap.add(15);
-        minHeap.add(50);
-        minHeap.add(25);
-        System.out.println(minHeap);
+        for (int i = 0; i < size; i++) {
+            heap.add(scanner.nextInt());
+            int[] arr = heapSort(heap.arr, heap.size);
+            System.out.println(getMedian(arr, heap.size));
+        }
+    }
 
-        int[] sortedArr = heapSort(minHeap.arr, minHeap.size);
-        System.out.println(Arrays.toString(sortedArr));
+    private static int getMedian(int[] arr, int size) {
+        if (size % 2 == 1) {
+            return arr[size / 2];
+        }
+
+        return (arr[size / 2] + arr[(size - 1) / 2]) / 2;
     }
 
 
