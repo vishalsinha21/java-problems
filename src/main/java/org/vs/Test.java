@@ -3,9 +3,6 @@ package org.vs;
 public class Test {
 
     public static void main(String[] args) {
-        String str = "00000";
-
-        System.out.println();
     }
 
     static int Find(int x, int y, int z) {
