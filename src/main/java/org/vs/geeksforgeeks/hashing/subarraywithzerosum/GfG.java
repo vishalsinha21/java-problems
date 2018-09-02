@@ -1,4 +1,4 @@
-package org.vs.geeksforgeeks.hashing.SubArrayWithZeroSum;
+package org.vs.geeksforgeeks.hashing.subarraywithzerosum;
 
 import java.util.Scanner;
 
