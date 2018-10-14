@@ -53,6 +53,27 @@ public class Graph {
                 }
             }
         }
+
+        System.out.println();
+    }
+
+    public void dfs(int start) {
+        boolean[] visited = new boolean[vertices];
+        dfsUtil(start, visited);
+        System.out.println();
+    }
+
+    private void dfsUtil(int start, boolean[] visited) {
+        visited[start] = true;
+        System.out.print(start + " ");
+        ListIterator<Integer> iterator = adj[start].listIterator();
+
+        while (iterator.hasNext()) {
+            Integer next = iterator.next();
+            if (!visited[next]) {
+                dfsUtil(next, visited);
+            }
+        }
     }
 
     public static void main(String[] args) {
@@ -68,5 +89,6 @@ public class Graph {
         System.out.println(graph);
 
         graph.bfs(2);
+        graph.dfs(2);
     }
 }
