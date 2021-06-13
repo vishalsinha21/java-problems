@@ -3,9 +3,12 @@ package org.vs.test;
 public class Test {
 
     public static void main(String[] args) {
-        int[] arr = {2, 2, 2, 4};
+        int[] arr = new int[5];
 
-        System.out.println(getSingle(arr));
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
+
     }
 
     static int getSingle(int arr[]) {

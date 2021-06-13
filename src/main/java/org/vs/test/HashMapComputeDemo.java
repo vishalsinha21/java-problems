@@ -6,7 +6,28 @@ import java.util.Map;
 public class HashMapComputeDemo {
 
     public static void main(String[] args) {
-        computeDemo();
+        computeIfAbsentDemo();
+    }
+
+    private static void computeIfAbsentDemo() {
+        Map<String, String> map = new HashMap<>();
+
+        map.put("one", "one");
+        map.put("two", "two");
+        map.put("three", "three");
+        map.put("six", null);
+
+        map.computeIfAbsent("four", k -> "four"); //this will add four
+        System.out.println(map);
+
+        map.computeIfAbsent("five", k -> null); //mapping function returns null so it won't add five
+        System.out.println(map);
+
+        map.computeIfAbsent("one", k -> "1"); //key if already present in map so it won't change anything
+        System.out.println(map);
+
+        map.computeIfAbsent("six", k -> "six"); //key present with null value in map, so will be replaced
+        System.out.println(map);
     }
 
     private static void computeDemo() {
