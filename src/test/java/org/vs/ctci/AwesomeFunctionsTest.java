@@ -1,10 +1,11 @@
 package org.vs.ctci;
 
-import com.sun.tools.javac.util.List;
 import org.junit.jupiter.api.Test;
 import org.vs.ctci.domain.Party;
 
 import java.math.BigInteger;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,9 +44,9 @@ class AwesomeFunctionsTest {
         Party party3 = new Party(BigInteger.valueOf(2000L), BigInteger.valueOf(1L), "CCC");
         Party party4 = new Party(BigInteger.valueOf(2000L), BigInteger.valueOf(1L), "DDD");
 
-        Map<BigInteger, java.util.List<Party>> partyMap = AwesomeFunctions.getPartyMap(List.of(party1, party2, party3, party4));
+        Map<BigInteger, java.util.List<Party>> partyMap = AwesomeFunctions.getPartyMap(Arrays.asList(party1, party2, party3, party4));
         assertThat(partyMap).hasSize(2)
-                .containsEntry(BigInteger.valueOf(1000L), List.of(party1, party2))
-                .containsEntry(BigInteger.valueOf(2000L), List.of(party3, party4));
+                .containsEntry(BigInteger.valueOf(1000L), Arrays.asList(party1, party2))
+                .containsEntry(BigInteger.valueOf(2000L), Arrays.asList(party3, party4));
     }
 }
