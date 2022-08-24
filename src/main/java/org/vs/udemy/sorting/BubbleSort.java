@@ -1,5 +1,7 @@
 package org.vs.udemy.sorting;
 
+import java.util.Arrays;
+
 /*
 Bubble sort always starts at beginning
 Compare to neighbor and swap if the order is wrong
@@ -21,7 +23,7 @@ public class BubbleSort {
                 }
             }
 
-            printArray(arr);
+            System.out.println(Arrays.toString(arr));
             //Decrement the unsortedPartitionIndex
             unsortedPartitionIndex--;
         }
@@ -31,13 +33,6 @@ public class BubbleSort {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
-    }
-
-    private static void printArray(int[] arr) {
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-        System.out.println();
     }
 
 }
